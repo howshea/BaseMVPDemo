@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivtiy<IView,MainPresenter> implements I
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mPresenter.getData(getWidth(), getHeight());
+        mPresenter.getData();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivtiy<IView,MainPresenter> implements I
 
     @Override
     public void setText(String text) {
-        mHomeTextView.setText(text);
+//        mHomeTextView.setText(text);
     }
 
     public int getWidth() {
