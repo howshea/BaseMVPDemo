@@ -11,23 +11,24 @@ import rx.Subscriber;
  * Created by haipo on 2016/12/15.
  */
 
-public class MainPresenter extends BasePresenter<IView> {
-    HomePage mHomePage;
+class MainPresenter extends BasePresenter<IView> {
+    private HomePage mHomePage;
+    private HomePage.CreativesBean creativesBean;
 
-    public MainPresenter(IView view) {
+
+    MainPresenter(IView view) {
         super(view);
     }
 
-    public void getData(int width, int height) {
+    void getData() {
 
-        HttpRequest.getInstance().getHome(width, height)
+        HttpRequest.getInstance().getHome()
                 .subscribe(new Subscriber<HomePage>() {
                     @Override
-                    public void onCompleted() {
-                        if (isViewAttached()) {
-                            showData();
-                            getView().setText(mHomePage.getText());
-                        }
+                    public void onNext(HomePage homePage) {
+                        mHomePage = homePage;
+                        creativesBean = mHomePage.getCreatives().get(0);
+
                     }
 
                     @Override
@@ -36,15 +37,18 @@ public class MainPresenter extends BasePresenter<IView> {
                     }
 
                     @Override
-                    public void onNext(HomePage homePage) {
-                        mHomePage = homePage;
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            showData();
+                        }
                     }
+
                 });
     }
 
-    public void showData() {
+    private void showData() {
         Glide.with(BaseApplication.getAppContext())
-                .load(mHomePage.getImg())
+                .load(creativesBean.getUrl())
                 .asBitmap()
                 .into(getView().setImage());
 

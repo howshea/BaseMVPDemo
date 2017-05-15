@@ -5,10 +5,12 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * Created by haipo on 2016/10/28.
+ * Created by haipo
+ * on 2016/10/28.
+ *
  */
 
-public interface ApiService {
-    @GET("{width}*{height}")
-    Observable<HomePage> getHome(@Path("width") int width, @Path("height") int height);
+interface ApiService {
+    @GET("1080*1920")
+    Observable<HomePage> getHome();
 }

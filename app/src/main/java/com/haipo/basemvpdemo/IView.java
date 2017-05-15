@@ -10,7 +10,7 @@ import com.haipo.basemvp.IBaseView;
  * Created by haipo on 2016/12/15.
  */
 
-public interface IView extends IBaseView {
+interface IView extends IBaseView {
     ImageView setImage();
     void setText(String text);
 }

@@ -12,23 +12,24 @@ import rx.schedulers.Schedulers;
 
 
 /**
- * Created by haipo on 2016/10/13.
+ * Created by haipo
+ * on 2016/10/13.
+ *
  */
 
-public class HttpRequest {
+class HttpRequest {
 
-    public static final String BASE_URL = "http://news-at.zhihu.com/api/4/start-image/";
+    private static final String BASE_URL = "http://news-at.zhihu.com/api/7/prefetch-launch-images/";
 
     private static final int DEFAULT_TIMEOUT = 5;
 
-    private Retrofit mRetrofit;
     private ApiService mApiService;
 
     private HttpRequest() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -38,7 +39,7 @@ public class HttpRequest {
         mApiService = mRetrofit.create(ApiService.class);
     }
 
-    public static HttpRequest getInstance() {
+    static HttpRequest getInstance() {
         return HttpRequestHolder.sInstance;
     }
 
@@ -49,8 +50,8 @@ public class HttpRequest {
 
 
 
-    public Observable<HomePage> getHome(int width, int height){
-        return mApiService.getHome(width,height)
+    Observable<HomePage> getHome(){
+        return mApiService.getHome()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
