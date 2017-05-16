@@ -28,6 +28,7 @@ class HomePage {
         return creatives;
     }
 
+    @SuppressWarnings("unused")
     public void setCreatives(List<CreativesBean> creatives) {
         this.creatives = creatives;
     }
@@ -42,49 +43,15 @@ class HomePage {
          */
 
         private String url;
-        private int start_time;
-        private int type;
-        private String id;
-        private List<String> impression_tracks;
+
 
         String getUrl() {
             return url;
         }
 
+        @SuppressWarnings("unused")
         public void setUrl(String url) {
             this.url = url;
-        }
-
-        public int getStart_time() {
-            return start_time;
-        }
-
-        public void setStart_time(int start_time) {
-            this.start_time = start_time;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public List<String> getImpression_tracks() {
-            return impression_tracks;
-        }
-
-        public void setImpression_tracks(List<String> impression_tracks) {
-            this.impression_tracks = impression_tracks;
         }
     }
 
